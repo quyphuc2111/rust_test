@@ -12,7 +12,8 @@ fn shutdown_remote(target: &str, delay_seconds: u32, force: bool) -> Result<Stri
     #[cfg(target_os = "windows")]
     {
         let remote = format!("\\\\{}", target);
-        let mut args = vec!["/s", "/m", &remote, "/t", &delay_seconds.to_string()];
+        let delay_str = delay_seconds.to_string();
+        let mut args = vec!["/s", "/m", &remote, "/t", &delay_str];
         
         if force {
             args.push("/f"); // Force close applications
@@ -44,7 +45,8 @@ fn restart_remote(target: &str, delay_seconds: u32, force: bool) -> Result<Strin
     #[cfg(target_os = "windows")]
     {
         let remote = format!("\\\\{}", target);
-        let mut args = vec!["/r", "/m", &remote, "/t", &delay_seconds.to_string()];
+        let delay_str = delay_seconds.to_string();
+        let mut args = vec!["/r", "/m", &remote, "/t", &delay_str];
         
         if force {
             args.push("/f");
